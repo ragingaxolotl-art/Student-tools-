@@ -23,6 +23,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+      - name: Verify Arena Lab
+        run: node --test arena-lab/core.test.mjs
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
         
@@ -30,6 +32,8 @@ jobs:
         run: |
           mkdir -p _site
           unzip -q site.zip -d _site
+          cp -R arena-lab _site/arena-lab
+          cp site-overrides/version-nav.js _site/version-nav.js
       - name: Upload website
         uses: actions/upload-pages-artifact@v3
         with:
